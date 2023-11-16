@@ -1,0 +1,19 @@
+@import "../../assets/variables.scss";
+
+.page {
+  &__wrapper {
+    background-color: $darkGrey;
+    padding: 2rem;
+  }
+  &__curriculum {
+    background-color: $white;
+    border-radius: 0.2rem;
+    page-break-after: always;
+    position: relative;
+    padding: 0;
+    width: 210mm;
+    height: 297mm;
+    margin: auto;
+    background-color: $white;
+  }
+}
