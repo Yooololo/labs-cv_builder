@@ -1,35 +1,48 @@
+import { FieldType } from "../../assets/typeUtils";
+
 const userFormConfig = [
-  // Personal Data
-  { field: "fullName", type: "text" },
-  { field: "email", type: "email" },
-  { field: "profilePicture", type: "file" },
+  { field: "fullName", type: FieldType.Text },
+  { field: "email", type: FieldType.Email },
+  { field: "profilePicture", type: FieldType.File },
   {
     field: "languages",
-    type: "array",
+    type: FieldType.Array,
     subFields: ["name", "level"],
     initialEntry: {},
   },
   {
     field: "softSkills",
-    type: "array",
+    type: FieldType.Array,
     subFields: ["skill"],
     initialEntry: {},
   },
   {
     field: "technicalHardSkills",
-    type: "array",
+    type: FieldType.Array,
     subFields: ["skill"],
     initialEntry: {},
   },
   {
-    field: "education",
-    type: "array",
+    field: "pertinentEducation",
+    type: FieldType.Array,
     subFields: ["name", "organization", "description", "startDate", "endDate"],
     initialEntry: {},
   },
   {
-    field: "workExperience",
-    type: "array",
+    field: "pertinentWorkExperience",
+    type: FieldType.Array,
+    subFields: ["name", "organization", "description", "startDate", "endDate"],
+    initialEntry: {},
+  },
+  {
+    field: "extraEducation",
+    type: FieldType.Array,
+    subFields: ["name", "organization", "description", "startDate", "endDate"],
+    initialEntry: {},
+  },
+  {
+    field: "extraWorkExperience",
+    type: FieldType.Array,
     subFields: ["name", "organization", "description", "startDate", "endDate"],
     initialEntry: {},
   },
