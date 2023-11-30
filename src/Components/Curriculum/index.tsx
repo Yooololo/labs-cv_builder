@@ -1,20 +1,21 @@
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import Page from "../Page";
+import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import Page from '../Page'
+import { UserFormValues } from '../../assets/typeUtils'
 
 const Curriculum = () => {
-  const location = useLocation();
-  const cvData = location.state?.cvData || {};
-  const [isVisible, setIsVisible] = useState(true);
+  const location = useLocation()
+  const cvData = location.state?.cvData || {}
+  const [isVisible, setIsVisible] = useState(true)
 
   const toggleVisibility = () => {
-    setIsVisible((prevVisible) => !prevVisible);
-  };
+    setIsVisible((prevVisible) => !prevVisible)
+  }
 
   return (
     <div>
       <button onClick={toggleVisibility}>
-        {isVisible ? "Hide CV Data" : "Show CV Data"}
+        {isVisible ? 'Hide CV Data' : 'Show CV Data'}
       </button>
 
       {isVisible && (
@@ -23,9 +24,9 @@ const Curriculum = () => {
           <pre>{JSON.stringify(cvData, null, 2)}</pre>
         </>
       )}
-      <Page data={cvData} />
+      <Page data={cvData as UserFormValues} />
     </div>
-  );
-};
+  )
+}
 
-export default Curriculum;
+export default Curriculum

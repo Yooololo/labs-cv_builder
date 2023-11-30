@@ -1,16 +1,32 @@
-import React, { useState, ChangeEvent, DragEvent } from "react";
+import React, { useState, ChangeEvent, DragEvent, useEffect } from "react";
+import styles from "./styles.module.scss";
 
 interface ProfilePictureInputProps {
   onChange: (value: any) => void;
+  value?: {
+    inputType: string;
+    file: File | string | null;
+    imageUrl: string;
+  } | null;
 }
 
 const ProfilePictureInput: React.FC<ProfilePictureInputProps> = ({
   onChange,
+  value,
 }) => {
   const [inputType, setInputType] = useState("local");
   const [file, setFile] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string>("");
   const [preview, setPreview] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (value) {
+      setInputType(value.inputType);
+      if (typeof value.file !== "string") setFile(value.file);
+      setImageUrl(value.imageUrl);
+      setPreview(value.imageUrl);
+    }
+  }, [value]);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -79,7 +95,11 @@ const ProfilePictureInput: React.FC<ProfilePictureInputProps> = ({
               <img
                 src={preview}
                 alt="Preview"
-                style={{ marginTop: "1rem", maxWidth: "100%" }}
+                style={{
+                  marginTop: "1rem",
+                  maxWidth: "200px",
+                  maxHeight: "200px",
+                }}
               />
             )}
             <div
@@ -119,7 +139,11 @@ const ProfilePictureInput: React.FC<ProfilePictureInputProps> = ({
               <img
                 src={preview}
                 alt="Preview"
-                style={{ marginTop: "1rem", maxWidth: "100%" }}
+                style={{
+                  marginTop: "1rem",
+                  maxWidth: "200px",
+                  maxHeight: "200px",
+                }}
               />
             )}
           </div>

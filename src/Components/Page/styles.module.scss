@@ -1,4 +1,4 @@
-@import "../../assets/variables.scss";
+@import '../../assets/variables.scss';
 
 .page {
   &__wrapper {
@@ -6,14 +6,27 @@
     padding: 2rem;
   }
   &__curriculum {
-    background-color: $white;
-    border-radius: 0.2rem;
-    page-break-after: always;
-    position: relative;
-    padding: 0;
-    width: 210mm;
-    height: 297mm;
-    margin: auto;
-    background-color: $white;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    width: 100%;
+    &__container {
+      background-color: $white;
+      border-radius: 0.2rem;
+      page-break-after: always;
+      position: relative;
+      padding: 0;
+      width: 210mm;
+      height: 297mm;
+      margin: auto;
+      background-color: $white;
+    }
+
+    &__column {
+      width: 100%;
+    }
+
+    &__profilePicture {
+      max-width: 25%;
+    }
   }
 }

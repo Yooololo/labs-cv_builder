@@ -1,23 +1,40 @@
-import userFormConfig from "./userFormConfig";
-import { InitialValues } from "../../assets/typeUtils";
+import {
+  InputWithDates,
+  InputWithLevel,
+  UserFormValuesWithSubfields,
+} from './../../assets/typeUtils'
+import userFormConfig from './userFormConfig'
+import {
+  FieldName,
+  FieldType,
+  UserFormValues,
+  UserFormValuesWithoutSubfields,
+} from '../../assets/typeUtils'
+import { generateDefaultInitialEntry } from '../../assets/logicUtils'
 
-const userFormInitialValues: InitialValues = userFormConfig.reduce(
-  (acc, field) => {
-    if (field.type === "file") {
-      acc[field.field] = {
-        inputType: "local",
+const generateUserFormInitialValues = (): UserFormValues => {
+  return userFormConfig.reduce((acc, field) => {
+    if (
+      field.type === FieldType.File &&
+      field.fieldName === FieldName.ProfilePicture
+    ) {
+      acc[field.fieldName] = {
+        inputType: 'local',
         file: null,
-        imageUrl: "",
-      };
-    } else if (field.type === "array") {
-      acc[field.field] =
-        typeof field.initialEntry === "string" ? [field.initialEntry] : [];
+        imageUrl: '',
+      }
+    } else if (field.type === FieldType.Array) {
+      if (field.fieldName in acc) {
+        acc[field.fieldName as keyof UserFormValuesWithSubfields] =
+          generateDefaultInitialEntry(field.subFields) as InputWithLevel[] &
+            InputWithDates[]
+      } else {
+        acc[field.fieldName as keyof UserFormValuesWithoutSubfields] = ''
+      }
     } else {
-      acc[field.field] = field.type === "text" ? "" : null;
+      acc[field.fieldName as keyof UserFormValuesWithoutSubfields] = ''
     }
-    return acc;
-  },
-  {} as InitialValues
-);
-
-export default userFormInitialValues;
+    return acc
+  }, {} as UserFormValues)
+}
+export default generateUserFormInitialValues
